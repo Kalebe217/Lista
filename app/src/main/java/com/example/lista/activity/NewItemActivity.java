@@ -26,8 +26,8 @@ public class NewItemActivity extends AppCompatActivity {
     Uri photoSelected = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        super.onCreate(savedInstanceState);/*
+        EdgeToEdge.enable(this);*/
         setContentView(R.layout.activity_new_item);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -82,12 +82,12 @@ public class NewItemActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data) {
-        super.onActivityResult(requestCode,data);
+        super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == PHOTO_PICKER_REQUEST){
             if(resultCode == Activity.RESULT_OK){
                 photoSelected =data.getData();
-                ImageView imvfotopreview =findViewById(R.id.imvPhotoPreview);
-                imvfotopreview.setImageURI(photoSelected);
+                ImageView imvfotoPreview =findViewById(R.id.imvPhotoPreview);
+                imvfotoPreview.setImageURI(photoSelected);
 
             }
         }

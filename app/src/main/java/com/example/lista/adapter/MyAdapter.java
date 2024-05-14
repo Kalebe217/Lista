@@ -1,6 +1,9 @@
 package com.example.lista.adapter;
 
+import android.os.Build;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import com.example.lista.model.MyItem;
 
 import java.util.List;
 
+
 public class MyAdapter extends RecyclerView.Adapter {
     MainActivity mainActivity;
     List<MyItem> itens;
@@ -20,6 +24,19 @@ public class MyAdapter extends RecyclerView.Adapter {
         this.mainActivity = mainActivity;
         this.itens=itens;
     }
+
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreatViewHolder(@NonNull ViewGroup parent, int viewType){
+        LayoutInflater inflater = LayoutInflater.from(mainActivity);
+        View v = inflater.inflate(R.layout.item_list,parent,false);
+        return new MyViewHolder(v);
+    }
+
+
+
+
     @Override
     public void onBindVIewHolder(@NonNull RecyclerView.ViewHolder holder, int position){
         MyItem myItem = itens.get(position);
@@ -38,4 +55,6 @@ public class MyAdapter extends RecyclerView.Adapter {
     public int getItemCount(){
         return itens.size();
     }
+
+
 }

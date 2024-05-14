@@ -11,8 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lista.R;
+import com.example.lista.adapter.MyAdapter;
 import com.example.lista.model.MyItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -37,15 +41,16 @@ public class MainActivity extends AppCompatActivity {
                 myItem.description=data.getStringExtra("description");
                 myItem.photo= data.getData();
                 itens.add(myItem);
+                myAdapter.notifyItemInserted(itens.size()-1);
             }
         }
     }
 
-
+    MyAdapter myAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        super.onCreate(savedInstanceState);/*
+        EdgeToEdge.enable(this);*/
         setContentView(R.layout.activity_main);
 
 
@@ -54,6 +59,24 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+
+        /**/
+        RecyclerView rvItens = findViewById(R.id.rvItens);
+        myAdapter=new MyAdapter(this,itens);
+        rvItens.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        rvItens.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
+        rvItens.addItemDecoration(dividerItemDecoration);
+        /**/
+
+
+
+
+
+
         FloatingActionButton fabAddItem = findViewById(R.id.fabAddNewItem);
         fabAddItem.setOnClickListener(new View.OnClickListener(){
             @Override
