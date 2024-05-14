@@ -28,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreatViewHolder(@NonNull ViewGroup parent, int viewType){
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
         View v = inflater.inflate(R.layout.item_list,parent,false);
         return new MyViewHolder(v);
@@ -38,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter {
 
 
     @Override
-    public void onBindVIewHolder(@NonNull RecyclerView.ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position){
         MyItem myItem = itens.get(position);
         View v = holder.itemView;
         ImageView imvfoto = v.findViewById(R.id.imvPhoto);
