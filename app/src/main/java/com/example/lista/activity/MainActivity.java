@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     static int NEW_ITEM_REQUEST = 1;
     List<MyItem> itens = new ArrayList<>();
 
-
-
+    MyAdapter myAdapter;
 
 
     @Override
@@ -46,14 +45,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    MyAdapter myAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);/*
-        EdgeToEdge.enable(this);*/
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -64,17 +61,18 @@ public class MainActivity extends AppCompatActivity {
 
         /**/
         RecyclerView rvItens = findViewById(R.id.rvItens);
+
         myAdapter=new MyAdapter(this,itens);
+        rvItens.setAdapter(myAdapter);
+
         rvItens.setHasFixedSize(true);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvItens.setLayoutManager(layoutManager);
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
         rvItens.addItemDecoration(dividerItemDecoration);
         /**/
-
-
-
-
 
 
         FloatingActionButton fabAddItem = findViewById(R.id.fabAddNewItem);
@@ -86,9 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-
-
 
     }
 }

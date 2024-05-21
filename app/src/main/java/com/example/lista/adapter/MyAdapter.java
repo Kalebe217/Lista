@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         MyItem myItem = itens.get(position);
         View v = holder.itemView;
         ImageView imvfoto = v.findViewById(R.id.imvPhoto);
-        imvfoto.setImageURI(myItem.foto);
+        imvfoto.setImageURI(myItem.photo);
 
         TextView tvTitle = v.findViewById(R.id.tvTitle);
         tvTitle.setText(myItem.title);
