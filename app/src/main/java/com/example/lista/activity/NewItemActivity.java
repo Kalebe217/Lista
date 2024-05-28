@@ -34,19 +34,25 @@ public class NewItemActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //detectar click
         ImageButton imgCI = findViewById(R.id.imbCI);
         imgCI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //cria e inicia intencao
                 Intent photoPickerIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 photoPickerIntent.setType("image/*");
                 startActivityForResult(photoPickerIntent, PHOTO_PICKER_REQUEST);
             }
         });
+
+        //detectar outro click
         Button btnAddItem = findViewById(R.id.btnAddItem);
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //verifica se há dados inseridos
                 if (photoSelected == null) {
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show();
                     return;
@@ -68,6 +74,7 @@ public class NewItemActivity extends AppCompatActivity {
                     return;
 
                 }
+                //devolve os dados recem adquiridos
                 Intent i = new Intent();
                 i.setData(photoSelected);
                 i.putExtra("title",title);
@@ -81,10 +88,13 @@ public class NewItemActivity extends AppCompatActivity {
 
 
     @Override
+    //ao finalizar atividade
     protected void onActivityResult(int requestCode,int resultCode,@Nullable Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        //verifica erros
         if(requestCode == PHOTO_PICKER_REQUEST){
             if(resultCode == Activity.RESULT_OK){
+                //salva a uri da foto
                 photoSelected =data.getData();
                 ImageView imvfotoPreview =findViewById(R.id.imvPhotoPreview);
                 imvfotoPreview.setImageURI(photoSelected);

@@ -24,10 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //cria inteiro
     static int NEW_ITEM_REQUEST = 1;
+    //cria lista
     List<MyItem> itens = new ArrayList<>();
 
+
     MyAdapter myAdapter;
+
 
 
     @Override
@@ -59,26 +63,34 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /**/
+        //identifica recicle view
         RecyclerView rvItens = findViewById(R.id.rvItens);
 
+        //cria my adapter
         myAdapter=new MyAdapter(this,itens);
+
+        //atribui ao rvitens os itens de myAdapter
         rvItens.setAdapter(myAdapter);
 
+
+        //configura rvitens
         rvItens.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvItens.setLayoutManager(layoutManager);
+
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(), DividerItemDecoration.VERTICAL);
         rvItens.addItemDecoration(dividerItemDecoration);
         /**/
 
 
+        //detectar click
         FloatingActionButton fabAddItem = findViewById(R.id.fabAddNewItem);
         fabAddItem.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //cria e inicia intencao
                 Intent i = new Intent(MainActivity.this, NewItemActivity.class);
                 startActivityForResult(i, NEW_ITEM_REQUEST);
             }

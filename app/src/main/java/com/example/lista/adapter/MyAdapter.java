@@ -26,6 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
 
+    //cria elemento da lista
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
@@ -37,6 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter {
 
 
 
+    //coloca no elemento da lista os dados
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position){
         MyItem myItem = itens.get(position);
