@@ -17,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lista.R;
+import com.example.lista.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
 
@@ -26,8 +28,12 @@ public class NewItemActivity extends AppCompatActivity {
     Uri photoSelected = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);/*
+        super.onCreate(savedInstanceState);
+
+        /*
         EdgeToEdge.enable(this);*/
+
+
         setContentView(R.layout.activity_new_item);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -98,6 +104,9 @@ public class NewItemActivity extends AppCompatActivity {
                 photoSelected =data.getData();
                 ImageView imvfotoPreview =findViewById(R.id.imvPhotoPreview);
                 imvfotoPreview.setImageURI(photoSelected);
+
+                NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+                vm.setSelectPhotoLocation(selectedphoto);
 
             }
         }
