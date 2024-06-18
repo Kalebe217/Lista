@@ -55,7 +55,7 @@ public class NewItemActivity extends AppCompatActivity {
 
 
         }
-
+        /**/
         //detectar click
         ImageButton imgCI = findViewById(R.id.imbCI);
         imgCI.setOnClickListener(new View.OnClickListener() {
