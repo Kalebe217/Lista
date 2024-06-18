@@ -2,6 +2,7 @@ package com.example.lista.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,25 +22,39 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lista.R;
 import com.example.lista.model.NewItemActivityViewModel;
+import com.example.lista.util.Util;
 
 public class NewItemActivity extends AppCompatActivity {
 
     static int PHOTO_PICKER_REQUEST = 1;
-    Uri photoSelected = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*
-        EdgeToEdge.enable(this);*/
-
-
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_new_item);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+
+        Uri selectPhotoLocation = vm.getSelectPhotoLocation();
+
+
+
+
+
+
+        if (selectPhotoLocation != null ){
+            ImageView imvfotoPreview= findViewById(R.id.imvPhotoPreview);
+            imvfotoPreview.setImageURI(selectPhotoLocation);
+
+
+        }
 
         //detectar click
         ImageButton imgCI = findViewById(R.id.imbCI);
@@ -58,6 +73,9 @@ public class NewItemActivity extends AppCompatActivity {
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //pega o uri do view model
+                Uri photoSelected =vm.getSelectPhotoLocation();
                 //verifica se há dados inseridos
                 if (photoSelected == null) {
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!", Toast.LENGTH_LONG).show();
@@ -74,8 +92,8 @@ public class NewItemActivity extends AppCompatActivity {
                     return;
                 }
                 EditText etDesc = findViewById(R.id.etDesc);
-                String description = etTitle.getText().toString();
-                if (title.isEmpty()) {
+                String description = etDesc.getText().toString();
+                if (description.isEmpty()) {
                     Toast.makeText(NewItemActivity.this, "É necessário inserir uma descricao", Toast.LENGTH_LONG).show();
                     return;
 
@@ -101,12 +119,12 @@ public class NewItemActivity extends AppCompatActivity {
         if(requestCode == PHOTO_PICKER_REQUEST){
             if(resultCode == Activity.RESULT_OK){
                 //salva a uri da foto
-                photoSelected =data.getData();
+                Uri photoSelected =data.getData();
                 ImageView imvfotoPreview =findViewById(R.id.imvPhotoPreview);
                 imvfotoPreview.setImageURI(photoSelected);
 
                 NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
-                vm.setSelectPhotoLocation(selectedphoto);
+                vm.setSelectPhotoLocation(photoSelected);
 
             }
         }

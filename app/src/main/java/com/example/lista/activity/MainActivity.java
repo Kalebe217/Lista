@@ -22,6 +22,7 @@ import com.example.lista.R;
 import com.example.lista.adapter.MyAdapter;
 import com.example.lista.model.MainActivityViewModel;
 import com.example.lista.model.MyItem;
+import com.example.lista.util.Util;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileNotFoundException;
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     //cria inteiro
     static int NEW_ITEM_REQUEST = 1;
     //cria lista
-    List<MyItem> itens = new ArrayList<>();
 
 
     MyAdapter myAdapter;
@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
                 MyItem myItem = new MyItem();
                 myItem.title= data.getStringExtra("title");
                 myItem.description=data.getStringExtra("description");
-                Uri selectedPhotoUri= data.getData();
+                Uri selectedPhotoURI= data.getData();
 
                 try{
-                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoUri, 100, 100);
-                    myItem.photo = photo;
+                    //mapeia a imagem
+                    Bitmap photo = Util.getBitmap(MainActivity.this, selectedPhotoURI, 100, 100);
                     myItem.photo = photo;
 
                 }

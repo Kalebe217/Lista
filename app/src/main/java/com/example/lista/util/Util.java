@@ -1,4 +1,4 @@
-package com.example.produtos.util;
+package com.example.lista.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
